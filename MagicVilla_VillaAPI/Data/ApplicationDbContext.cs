@@ -1,5 +1,6 @@
 ﻿using MagicVilla_VillaAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MagicVilla_VillaAPI.Data
 {
@@ -10,6 +11,7 @@ namespace MagicVilla_VillaAPI.Data
 
         }
         public DbSet<Villa> Villas {get;set;}
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -66,6 +68,18 @@ namespace MagicVilla_VillaAPI.Data
               {
                   Id = 5,
                   Name = "Diamond Pool Villa",
+                  Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
+                  ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa2.jpg",
+                  Occupancy = 4,
+                  Rate = 600,
+                  Sqft = 1100,
+                  Amenity = "",
+                  CreatedDate = DateTime.Now
+              },
+              new Villa
+              {
+                Id = 6,
+                  Name = "66Diamond Pool Villa",
                   Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                   ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa2.jpg",
                   Occupancy = 4,
