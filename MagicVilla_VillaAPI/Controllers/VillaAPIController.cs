@@ -115,10 +115,7 @@ namespace MagicVilla_VillaAPI.Controllers
             {
                 return BadRequest();
             }
-            //var villa=VillaStore.villaList.FirstOrDefault(u=>u.Id==id);
-            //villa.Name=villaDTO.Name;
-            //villa.Occupancy=villaDTO.Occupancy;
-            //villa.Sqft=villaDTO.Sqft;
+            
             Villa model = new()
             {
                 Amenity = villaDTO.Amenity,
