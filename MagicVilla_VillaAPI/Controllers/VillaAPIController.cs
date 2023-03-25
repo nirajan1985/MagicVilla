@@ -116,7 +116,7 @@ namespace MagicVilla_VillaAPI.Controllers
         [HttpDelete ("{id:int}",Name="DeleteVilla")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> DeleteVilla (int id)
         {
             try
@@ -233,6 +233,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
             return _response;
+
 
 
         }
