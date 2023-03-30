@@ -6,34 +6,35 @@ using System.Net;
 
 namespace MagicVilla_VillaAPI.Controllers
 {
-    [Route("api/UsersAuth")]
+    [Route("api/v{version:apiVersion}/UsersAuth")]
     [ApiController]
+    [ApiVersionNeutral]
     public class UsersController : Controller
     {
         private readonly IUserRepository _userRepo;
         protected APIResponse _response;
-        public UsersController(IUserRepository userRepo) 
+        public UsersController(IUserRepository userRepo)
         {
             _userRepo = userRepo;
-            this._response = new();
+            _response = new();
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO model)
         {
-            var loginResponse=await _userRepo.Login(model);
-            if(loginResponse.User==null || string.IsNullOrEmpty(loginResponse.Token))
+            var loginResponse = await _userRepo.Login(model);
+            if (loginResponse.User == null || string.IsNullOrEmpty(loginResponse.Token))
             {
-                _response.StatusCode=HttpStatusCode.BadRequest;
+                _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.IsSuccess = false;
                 _response.ErrorMessages.Add("Username or password is incorrect");
                 return BadRequest(_response);
             }
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;
-            _response.Result=loginResponse;
+            _response.Result = loginResponse;
             return Ok(_response);
 
-            
+
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationRequestDTO model)
@@ -41,7 +42,7 @@ namespace MagicVilla_VillaAPI.Controllers
             bool ifUserNameUnique = _userRepo.IsUniqueUser(model.UserName);
             if (!ifUserNameUnique)
             {
-                _response.StatusCode= HttpStatusCode.BadRequest;    
+                _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.IsSuccess = false;
                 _response.ErrorMessages.Add("Username already exists");
                 return BadRequest(_response);
@@ -56,7 +57,7 @@ namespace MagicVilla_VillaAPI.Controllers
             }
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;
-            return Ok(_response) ;
+            return Ok(_response);
         }
     }
 }

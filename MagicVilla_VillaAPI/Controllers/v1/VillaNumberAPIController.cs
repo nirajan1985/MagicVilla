@@ -5,10 +5,14 @@ using MagicVilla_VillaAPI.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace MagicVilla_VillaAPI.Controllers
+namespace MagicVilla_VillaAPI.Controllers.v1
 {
+
+    [Route("api/v{version:apiVersion}/VillaNumberAPI")]
     [ApiController]
-    [Route("api/VillaNumberAPI")]
+    [ApiVersion("1.0")]
+    
+
     public class VillaNumberAPIController : ControllerBase
     {
         private readonly IVillaNumberRepository _dbVillaNumber;
@@ -24,6 +28,7 @@ namespace MagicVilla_VillaAPI.Controllers
             _dbVilla = dbVilla;
         }
         [HttpGet]
+        
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -43,6 +48,15 @@ namespace MagicVilla_VillaAPI.Controllers
             }
             return _response;
         }
+        [HttpGet("GetString")]
+
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
+
+
+
         [HttpGet("{id:int}", Name = "GetVillaNumber")]
 
         public async Task<ActionResult<APIResponse>> GetVillaNumber(int id)
