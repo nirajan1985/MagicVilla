@@ -14,6 +14,7 @@ namespace MagicVilla_VillaAPI.Controllers.v1
     [Route("api/v{version:apiVersion}/VillaAPI")]
     [ApiController]
     [ApiVersion("1.0")]
+
     public class VillaAPIController : ControllerBase
     {
         protected APIResponse _response;
@@ -27,6 +28,7 @@ namespace MagicVilla_VillaAPI.Controllers.v1
         }
 
         [HttpGet]
+        [ResponseCache(CacheProfileName="Default30")]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -50,6 +52,7 @@ namespace MagicVilla_VillaAPI.Controllers.v1
         }
         [HttpGet("{id:int}", Name = "GetVilla")]
         [Authorize(Roles = "admin")]
+        [ResponseCache(CacheProfileName ="Default30")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
