@@ -54,6 +54,7 @@ namespace MagicVilla_VillaAPI.Controllers.v1
                 
                 _response.Result = _mapper.Map<List<VillaDTO>>(villaList);
                 _response.StatusCode = HttpStatusCode.OK;
+                _response.IsSuccess=true;
                 return Ok(_response);
             }
             catch (Exception ex)
@@ -80,15 +81,18 @@ namespace MagicVilla_VillaAPI.Controllers.v1
                 {
 
                     return BadRequest();
+                    
                 }
                 var villa = await _dbVilla.GetAsync(u => u.Id == id);
                 if (villa == null)
                 {
                     return NotFound();
+                    
                 }
 
                 _response.Result = _mapper.Map<VillaDTO>(villa);
                 _response.StatusCode = HttpStatusCode.OK;
+                _response.IsSuccess=true;
                 return Ok(_response);
             }
             catch (Exception ex)
@@ -112,6 +116,7 @@ namespace MagicVilla_VillaAPI.Controllers.v1
                 {
                     ModelState.AddModelError("CustomError", "Name already exists");
                     return BadRequest(ModelState);
+                    
 
 
                 }
@@ -119,6 +124,7 @@ namespace MagicVilla_VillaAPI.Controllers.v1
                 if (createDTO == null)
                 {
                     return BadRequest(createDTO);
+                    
                 }
                 Villa villa = _mapper.Map<Villa>(createDTO);
 
@@ -127,6 +133,7 @@ namespace MagicVilla_VillaAPI.Controllers.v1
                 await _dbVilla.CreateAsync(villa);
                 _response.Result = _mapper.Map<VillaDTO>(villa);
                 _response.StatusCode = HttpStatusCode.Created;
+                _response.IsSuccess = true;
 
                 return CreatedAtRoute("GetVilla", new { id = villa.Id }, _response);
             }
